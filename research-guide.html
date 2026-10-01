@@ -1,0 +1,905 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light"><title>TB331FC · 原生 Linux / Omarchy 研究与执行策略</title><style>
+:root{--ink:#152d35;--muted:#536871;--accent:#1d6b67;--line:#dce5e5;--paper:#fff;--back:#f3f6f5;--soft:#edf5f3}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:78px}body{margin:0;background:var(--back);color:var(--ink);font:16px/1.85 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif}
+a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}.hero{background:#102f39;color:#f7faf9;padding:48px max(24px,calc((100vw - 1040px)/2)) 36px}.eyebrow{letter-spacing:.14em;font-size:12px;font-weight:650;color:#afccc7}.hero h1{font-size:clamp(28px,4vw,43px);line-height:1.35;margin:16px 0 10px;max-width:1000px}.hero p{margin:0;color:#d8e7e5;max-width:950px}.pills{display:flex;gap:8px;flex-wrap:wrap;margin-top:24px}.pills span{font-size:12px;border:1px solid #4b6c70;border-radius:20px;padding:3px 11px}.nav{position:sticky;top:0;z-index:3;background:rgba(255,255,255,.97);border-bottom:1px solid var(--line)}.nav-inner{max-width:1100px;margin:auto;display:flex;overflow-x:auto;gap:20px;padding:14px 24px;white-space:nowrap}.nav a{font-size:14px;font-weight:650}.main{max-width:1100px;margin:26px auto 64px;padding:0 24px}.chapter{background:var(--paper);padding:36px 46px;margin-bottom:22px;border:1px solid var(--line);border-radius:12px;scroll-margin-top:80px;overflow:hidden}.chapter-label{font-size:12px;font-weight:700;letter-spacing:.12em;color:var(--accent);margin-bottom:9px}.chapter h1{font-size:27px;line-height:1.45;margin:0 0 24px}.chapter h2{font-size:22px;line-height:1.55;margin:38px 0 16px;padding-top:12px;border-top:1px solid var(--line)}.chapter h3{font-size:18px;line-height:1.5;margin:27px 0 12px}.chapter p{margin:12px 0}.chapter strong{font-weight:700}.chapter code{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:.9em;overflow-wrap:anywhere;background:#f0f4f4;border-radius:4px;padding:2px 4px}.chapter pre{background:#122d37;color:#e6f0ed;border-radius:8px;overflow-x:auto;padding:18px 20px;font-size:13px;line-height:1.75}.chapter pre code{color:inherit;background:transparent;white-space:pre;overflow-wrap:normal;padding:0}.table-scroll{overflow-x:auto;margin:20px 0;border:1px solid var(--line);border-radius:8px}table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.65}th{background:var(--soft);font-weight:650;text-align:left}td,th{padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top;min-width:115px}tr:last-child td{border-bottom:0}tbody tr:nth-child(even){background:#fafcfb}.ref{font-size:.85em;white-space:nowrap}li{margin:8px 0}footer{max-width:1040px;margin:0 auto 48px;padding:0 24px;color:var(--muted);font-size:13px}.chapter blockquote{border-left:4px solid var(--accent);margin:18px 0;padding:10px 18px;background:var(--soft)}
+@media(max-width:680px){body{font-size:15px}.hero{padding:32px 20px 26px}.nav-inner{gap:17px;padding:12px 16px}.main{padding:0 12px;margin-top:16px}.chapter{padding:23px 18px;border-radius:9px}.chapter h1{font-size:23px}.chapter h2{font-size:20px}.chapter pre{padding:14px}.table-scroll table{min-width:600px}}
+@media print{body{background:white;color:black;font-size:10pt}.hero{background:white;color:black;padding:0 0 20px}.hero p,.eyebrow{color:#444}.pills,.nav{display:none}.main{padding:0;margin:0;max-width:none}.chapter{padding:0;border:0;break-before:page}.chapter:first-child{break-before:auto}pre,table,tr{break-inside:avoid}.table-scroll{overflow:visible}a{color:inherit}.chapter pre{background:#eee;color:black;white-space:pre-wrap}.hero h1{font-size:25pt}}
+</style></head>
+<body><header class="hero"><div class="eyebrow">RESEARCH &amp; EXECUTION KIT · 2026.09.30</div><h1>把 TB331FC 变成 Linux 平板：<br>先证明通路，再动手刷机。</h1><p>联想小新 Pad 2024 · ZUX OS 1.1.10.680 · Claude Code × Codex 双 Agent 执行包</p><div class="pills"><span>首日：2026-10-01</span><span>本机尚未连接</span><span>设备写入未获批准</span><span>32 项模拟测试通过</span></div></header>
+<nav class="nav"><div class="nav-inner"><a href="#start">先从这里开始</a><a href="#strategy">研究策略</a><a href="#methods">执行方法</a><a href="#agents">双 Agent 分工</a><a href="#tomorrow">明日执行单</a><a href="#sources">研究来源</a><a href="#testing">测试与边界</a></div></nav>
+<main class="main"><section id="start" class="chapter"><div class="chapter-label">先从这里开始</div><h1>TB331FC 原生 Linux / Omarchy 研究与 Agent 执行包</h1>
+<p><strong>给 Jack｜研究基线 2026-09-30｜明天开始：2026-10-01（UTC+8）</strong></p>
+<p>你的设备：照片中的联想小新 Pad 2024，<strong>TB331FC / 骁龙685 / 8GB+128GB / ZUX OS 1.1.10.680</strong>。</p>
+<h2>先看结论</h2>
+<p><strong>可以让 Claude Code 与 Codex 开始协作研究，但现有证据还不能批准直接刷机。</strong> 官方解锁入口和 Omarchy 官方 ARM 工作都是值得推进的线索；本机精确版本的解锁结果、恢复材料与 Linux 驱动仍未验证。</p>
+<p>这不是一键刷机包。它包含研究结论、后续方法、两个 Agent 的合同与启动任务，以及一个默认不连接设备的只读采集器。当前没有设备写入权限，没有解锁文件，没有厂商镜像，也没有预填的成功记录。</p>
+<h2>明天最短启动顺序</h2>
+<p><strong>1．先拔掉 Pad，解压到一个新目录。</strong> 建议目录是 <code>~/Projects/tb331fc-omarchy-agent-kit</code>。不要覆盖现有项目。</p>
+<p><strong>2．先读主策略，再建立两个工作区。</strong> 主策略是 <code>docs/01-strategy.zh-CN.md</code>；Git worktree 的完整命令在 <code>docs/03-agent-workflow.zh-CN.md</code>。先有初始 commit，再创建 worktree，不让两个工具同时改主目录。</p>
+<p><strong>3．给 Claude 和 Codex 各自一条启动指令。</strong> 在它们各自的 worktree 打开会话，把以下对应文字交给它们：</p>
+<pre><code class="language-text">Claude Code：读取 CLAUDE.md、README.md 和 prompts/claude-start.md，
+按该任务开始。先研究、核对证据并给出计划；不要操作真实设备。
+</code></pre>
+<pre><code class="language-text">Codex：读取 AGENTS.md、README.md 和 prompts/codex-start.md，
+先独立审计采集脚本与测试，重点找反例；不要操作真实设备。
+</code></pre>
+<p>初始启动参数已写在工作流文档中。先用计划/只读模式，明确可写范围后才允许修改本项目文件；<strong>不要开启跳过审批或完全放权模式</strong>。</p>
+<p><strong>4．你在独立终端验证采集器。</strong> 此时仍不连接 Pad：</p>
+<pre><code class="language-bash">cd ~/Projects/tb331fc-omarchy-agent-kit
+PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s tests -v
+python3 scripts/collect_readonly.py
+</code></pre>
+<p>默认只显示计划。随包 <code>artifacts/unit-tests.txt</code> 记录了生成时的模拟测试，但你和Agent仍应检查并在Mac重跑。</p>
+<p><strong>5．脚本经双方审阅后，由你连接并读取设备。</strong> 暂停/退出两个Agent的工具执行；确认没有后台循环。启用USB调试、只连接这台平板，在你自己的终端执行：</p>
+<pre><code class="language-bash">adb devices -l
+python3 scripts/collect_readonly.py --collect
+</code></pre>
+<p>脚本提示输入USB序列号，不回显。更完整的环境准备与失败处理见 <code>docs/02-runbook.zh-CN.md</code>。<strong>不要在这个阶段切换OEM解锁开关、重启到下载模式或执行任何刷写。</strong></p>
+<p><strong>6．拔线、查看报告、检查脱敏。</strong> 私人报告默认在 <code>~/.local/share/tb331fc-owner-only/</code>，不在仓库内。只把你审阅过的过滤版复制到 <code>artifacts/approved-input/</code>，再交给两个Agent解释。</p>
+<p><strong>7．让两个Agent交付一页决策，而不是自动进入刷机。</strong> 首日任务表在 <code>docs/05-first-day.zh-CN.md</code>；用 <code>templates/day1-decision.md</code> 汇总。只有证据和恢复条件过关后，才提出单独的实际操作申请。</p>
+<h2>文件导航</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>文件/目录</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>docs/01-strategy.zh-CN.md</code></td>
+<td>完整研究结论、解锁假设、原生路线、阶段门</td>
+</tr>
+<tr>
+<td><code>docs/02-runbook.zh-CN.md</code></td>
+<td>主机准备、采集、脱敏、固件分析、后续实验方法</td>
+</tr>
+<tr>
+<td><code>docs/03-agent-workflow.zh-CN.md</code></td>
+<td>Claude/Codex分工、启动模式、worktree、交叉审核</td>
+</tr>
+<tr>
+<td><code>docs/04-sources.md</code></td>
+<td>27项来源及哪些结论不能从来源推导</td>
+</tr>
+<tr>
+<td><code>docs/05-first-day.zh-CN.md</code></td>
+<td>明天的具体安排与停机条件</td>
+</tr>
+<tr>
+<td><code>CLAUDE.md</code> / <code>AGENTS.md</code></td>
+<td>两个Agent各自应遵守的项目合同</td>
+</tr>
+<tr>
+<td><code>prompts/</code> / <code>tasks/</code></td>
+<td>可直接交给Agent的启动任务与验收标准</td>
+</tr>
+<tr>
+<td><code>templates/</code></td>
+<td>硬件报告、恢复矩阵、固件清单、操作提案、首日决策</td>
+</tr>
+<tr>
+<td><code>scripts/collect_readonly.py</code></td>
+<td>默认计划模式；Owner主动执行后做固定ADB读取</td>
+</tr>
+<tr>
+<td><code>tests/</code> / <code>artifacts/</code></td>
+<td>模拟测试与生成时测试记录；不包含本机测试结果</td>
+</tr>
+<tr>
+<td><code>STATUS.md</code></td>
+<td>初始状态：本机未连接、所有设备写入门关闭</td>
+</tr>
+<tr>
+<td><code>research-guide.html</code></td>
+<td>可用浏览器打开的合并阅读版</td>
+</tr>
+</tbody>
+</table></div>
+<h2>这套包已验证什么</h2>
+<p>生成时在隔离的 Linux 环境运行了32项模拟单元测试；没有启动真实ADB，也没有连接Mac/Pad。测试涵盖默认不执行、目标型号和USB检查、禁止任意查询、多设备/异常状态拒绝、超时、脱敏、文件权限与协作锁。</p>
+<p>测试通过<strong>不证明</strong>原厂恢复可行、Bootloader可解锁、内核可启动或Omarchy可用。具体测试环境和边界见 <code>artifacts/TESTING.md</code>。</p>
+<h2>最重要的操作规则</h2>
+<p>研究与编码时拔线；实机动作由你从单一终端执行。提示词、文件沙盒和协作锁都不是不可绕过的USB写保护。未知条件保留为未知，不能为了完成任务自行扩大权限。</p>
+<p>没有匹配固件、恢复条件和逐次批准，不进行解锁、降级、重新上锁、临时启动镜像、写分区、进入EDL或上传loader。主策略中的阶段门是研究安排，<strong>不是自动化执行许可</strong>。</p>
+</section><section id="strategy" class="chapter"><div class="chapter-label">研究策略</div><h1>TB331FC → 原生 Linux → Omarchy：研究结论与实施策略</h1>
+<p><strong>版本：1.0｜研究日期：2026-09-30｜首日执行日期：2026-10-01（UTC+8）</strong><br/>
+<strong>对象：Jack 的联想小新 Pad 2024，TB331FC，照片显示 Snapdragon 685、8 GB / 128 GB、ZUX OS 1.1.10.680。</strong><br/>
+<strong>执行主机：Mac，具体芯片、macOS 版本、工具版本待读取。</strong></p>
+<p>本文件是研究与决策基线，不是已验证的刷机教程。引用 <code>[Sxx]</code> 的来源、阅读范围和局限见同目录 <code>04-sources.md</code>。未标为外部事实的门槛、角色、时间盒及验收数值，均是本项目的工程设计建议，不是厂商保证。</p>
+<h2>0. 决策摘要</h2>
+<p><strong>建议启动项目，但把明天的目标定为“查清本机通路并形成可审查实验方案”，而不是“必须刷成 Omarchy”。</strong></p>
+<p>目前有足够线索开展官方解锁核实、固件离线分析、采集工具开发及 ARM64 用户空间验证；但没有足够证据，批准对这台 <strong>ZUX OS 1.1.10.680</strong> 的 TB331FC 执行解锁、降级、刷写或 EDL 操作。</p>
+<p>这不是认定原生移植做不到。结论是：<strong>尚缺本机证据、匹配恢复材料和可复现启动路径，不能把研究假设升级为硬件操作许可。</strong></p>
+<p>最合理的总体路线是：</p>
+<pre><code class="language-text">                       ┌─ 官方申请条件 / 精确固件 / 解锁验证逻辑调查 ─┐
+本机只读识别与备份准备 ─┤                                             ├─ 人工阶段决策
+                       └─ Mac 上 ARM64 Omarchy 用户空间验证 ─────────┘
+                                                                      │
+                                            解锁与恢复证据过关后才进入 │
+                                                                      ▼
+         最小启动证据 → 显示/输入/电源/网络 → GPU + Wayland → Omarchy
+</code></pre>
+<p>两条并行路线各自出报告。<strong>Mac 虚拟机能跑 Omarchy，不等于平板能启动 Linux；平板解锁，不等于 Linux 驱动齐全。</strong></p>
+<h2>1. 已知事实、关键未知和上一轮结论的修正</h2>
+<h3>1.1 本机事实分层</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>项目</th>
+<th>当前结论</th>
+<th>证据与边界</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>商品与型号</td>
+<td>小新 Pad 2024 / TB331FC</td>
+<td>用户提供的设置页照片；不是 2025，也不是 TB335FC</td>
+</tr>
+<tr>
+<td>处理器、容量</td>
+<td>骁龙 685、8 GB / 128 GB</td>
+<td>同一照片；实际可用内存与分区布局仍须读取</td>
+</tr>
+<tr>
+<td>系统展示版本</td>
+<td>ZUX OS 1.1.10.680</td>
+<td>照片；不等于已知完整 Android build fingerprint</td>
+</tr>
+<tr>
+<td>出厂系统分支</td>
+<td>未知</td>
+<td>当前 UI 不能证明出厂时是 ZUI 还是 ZUX</td>
+</tr>
+<tr>
+<td>BL 锁定/解锁状态</td>
+<td>未知</td>
+<td>尚未连接设备采集；不能依据“正常开机”推断</td>
+</tr>
+<tr>
+<td>OEM 解锁开关</td>
+<td>未知</td>
+<td>是否存在、是否灰色、当前状态都未确认；首日只观察，不切换</td>
+</tr>
+<tr>
+<td>GPU 精确型号/芯片 ID/驱动</td>
+<td>未验证</td>
+<td>前文的 Adreno 610 说法不能替代本机驱动与 GPU ID 证据</td>
+</tr>
+<tr>
+<td>内核、设备树、启动头、A/B</td>
+<td>未知</td>
+<td>不能根据 SoC 或 Android 主版本直接填表</td>
+</tr>
+<tr>
+<td>键盘连接类型</td>
+<td>未知</td>
+<td>照片可见键盘，但不能确认蓝牙、USB 或专用触点</td>
+</tr>
+<tr>
+<td>Mac 类型</td>
+<td>未知</td>
+<td>先确认 Apple Silicon / Intel，再决定虚拟机路径</td>
+</tr>
+</tbody>
+</table></div>
+<h3>1.2 需要修正的三项认识</h3>
+<p><strong>第一，Omarchy 的 ARM64 路线已经比“只有民间实验”更进一步。</strong> 官方于 2026-09-18 宣布 Omarchy Dragon，公开工作重点是 Snapdragon X / X2 系列电脑，仍按具体机器推进。它提供有价值的 ARM 软件与安装器成果，但没有在该公告中承诺 TB331FC 支持。<a class="ref" href="#src-S13">[S13]</a></p>
+<p><strong>第二，TB331FC 的解锁证据是混合的。</strong> 官方入口可访问；同型号存在历史失败报告，<code>lenovoubl</code> 上也有较新的失败记录。这些材料不构成“必然能解锁”，也不构成“绝对无法解锁”。本项目必须区分型号、完整固件、出厂分支和实际命令结果。<a class="ref" href="#src-S01">[S01]</a><a class="ref" href="#src-S02">[S02]</a><a class="ref" href="#src-S03">[S03]</a></p>
+<p><strong>第三，邻近机型的 Linux 移植不能直接当成本机驱动表。</strong> 本次访问相关 postmarketOS 页面遇到访问限制，未重新核实之前提到的 TB128FU 功能表。不得将那份表写成已确认事实，更不得刷入其镜像。<a class="ref" href="#src-S19">[S19]</a></p>
+<h2>2. 解锁研究：真正值得投入的方向</h2>
+<h3>2.1 首选官方渠道，而不是先“试各种破解包”</h3>
+<p>联想/ZUI 官方解锁页仍存在，需要登录。页面区分普通序列号与 Bootloader_SN，并明确存在部分设备或版本不支持的情况；页面中还包含某些版本须经指定服务流程升级的条件提示。<strong>公开页面可读，不代表已经确认你的账号、型号和版本可以获批。</strong><a class="ref" href="#src-S01">[S01]</a></p>
+<p>因此，第一个高价值实验不是刷入任何文件，而是由你手动完成：确认官网是否识别这台设备，取得明确的允许/拒绝/需服务站处理的结果。只把脱敏后的结果交给 Agent。账号、序列号、邮箱及设备专属文件留在你控制的本地目录。</p>
+<p>若官网要求指定服务流程，记录原文、适用型号、版本要求及厂商工单。不要自行将“指定版本”理解为某个论坛旧版，更不要让 Agent 代替你接受服务或付费。</p>
+<h3>2.2 两条同型号失败记录说明了什么</h3>
+<p>2024-05-27 的联想社区发帖者称，TB331FC 使用官方申请到的 <code>sn.img</code> 时，写入步骤被锁定状态拒绝。它是第一人称失败记录，不是厂商根因分析。<a class="ref" href="#src-S02">[S02]</a></p>
+<p><code>lenovoubl</code> 的 Issue #1（2026-03-12）报告：TB331FC / ZUI 15.1.328，生成文件能完成写入，但后续 OEM 解锁失败。它的系统分支和版本与你照片中的版本并不相同。<a class="ref" href="#src-S03">[S03]</a></p>
+<p><strong>工程推论：必须把至少四个状态分开记录：申请文件成功、文件格式解析通过、写入步骤成功、锁状态真正改变。</strong> 不得用前三者替代第四者。也不能把某个错误归因于“缺少一个命令”，然后顺手执行更危险的 critical unlock、擦除或降级。</p>
+<h3>2.3 对 lenovoubl 的静态检查结论</h3>
+<p>本次读取了其公开仓库、前端页面和 <code>js/main.js</code>，没有在设备上运行它，也没有取得固定提交的完整离线副本。<a class="ref" href="#src-S04">[S04]</a><a class="ref" href="#src-S05">[S05]</a><a class="ref" href="#src-S06">[S06]</a></p>
+<p>在读取的主脚本中，生成过程是将固定头部/内容、序列号、填充与固定签名数据拼接；没有看到针对新序列号重新签名或向官方后端申请签名的流程。<strong>这说明它是需要核实适用条件的格式构造工具，不能仅凭代码能生成文件就认定能绕过本机验证。</strong> 是否存在特定引导程序行为、签名覆盖范围或历史兼容条件，需要再审查实际验证端；单看生成端不能定论。<a class="ref" href="#src-S06">[S06]</a></p>
+<p>前端提示还要求按<strong>初始操作系统</strong>选择分支。不要看到现在写着 ZUX，就自动选择 ZUX 分支；这是明天要验证的独立问题。<a class="ref" href="#src-S05">[S05]</a></p>
+<p>建议让 Claude 分析“验证端究竟检查什么”，Codex 做“输入/输出与结构解释是否可复现”的独立检查。禁止把真实设备标识直接提交给未经审查的第三方在线生成器。</p>
+<h3>2.4 四个可检验假设</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>假设</th>
+<th>如何取证</th>
+<th>通过标准</th>
+<th>不能代替证据的东西</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>H1：本机官方流程可用</td>
+<td>官网人工申请/咨询；完整版本与设备身份匹配</td>
+<td>官方对本机明确答复，并有匹配方法、风险和恢复条件</td>
+<td>官网有一个输入框</td>
+</tr>
+<tr>
+<td>H2：文件分支或标识选错</td>
+<td>比较官方说明、出厂资料、脱敏属性；本地比较文件结构</td>
+<td>明确每个输入来自哪里，并能解释格式与验证逻辑</td>
+<td>“长度是 64，所以一定选某分支”</td>
+</tr>
+<tr>
+<td>H3：当前引导程序的策略不同</td>
+<td>从可信匹配固件离线分析相关启动组件；关联版本与命令处理路径</td>
+<td>能定位拒绝条件，区分格式、状态、签名、授权/策略错误</td>
+<td>不同版本的成功截图</td>
+</tr>
+<tr>
+<td>H4：存在精确版本的公开研究通路</td>
+<td>搜索原作者报告/补丁/源码，核对设备与版本</td>
+<td>可复现实验材料和完整前提；重新过风险门槛</td>
+<td>商家出厂已解锁、同 SoC 设备可解锁</td>
+</tr>
+</tbody>
+</table></div>
+<p>H3/H4 可以继续开展合法的自有设备研究，但不等于允许在线模糊测试引导程序、反复发送 OEM 命令、盲试漏洞包或写入未知 loader。没有可信的现成通路时，应转为离线逆向任务，而不是提高硬件试错强度。</p>
+<h3>2.5 首日逆向工作的合理深度</h3>
+<p>先定位固件包里的启动组件、文件格式、版本、签名元数据及命令字符串；再为相关处理函数建立“输入 → 前置状态 → 验证 → 返回码”的说明。区分<strong>在二进制中看到字符串</strong>与<strong>证明该代码路径在这台设备上生效</strong>。</p>
+<p>不要默认固件中的 <code>abl</code>、<code>xbl</code> 或分区名称一定如此；根据实际清单确定。工具也不是可信根：下载反汇编器、解析器及依赖须先审阅来源，外部代码只在无平板连接的隔离环境执行。首日不要求完成安全启动完整逆向，不以“必须攻破”为验收目标。</p>
+<h2>3. 恢复能力必须先于写入</h2>
+<h3>3.1 必须区分三个“备份”</h3>
+<p><strong>用户数据备份</strong>保存照片、文档、应用可导出数据和必要的账户恢复手段。<strong>原厂恢复包</strong>提供重装系统的材料。<strong>设备专属分区/校准数据</strong>可能关系到具体硬件的正常工作。三者不能互相替代。</p>
+<p>库存 Android 上能运行 ADB，不表示可以读取所有块设备、获得解密后的所有应用数据，或制作完整可恢复镜像。本工具只采集信息，绝不宣称完成了固件或用户数据备份。</p>
+<p>在无法读取某个敏感/专属分区时，记录为未知，不用提权或 EDL 来“补齐表格”。若拟议方案会触及这些未知区域，门槛不能通过。</p>
+<h3>3.2 恢复矩阵</h3>
+<p>使用 <code>templates/recovery-matrix.md</code>。至少回答：</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>故障层级</th>
+<th>必须证明或明确记录的事</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Android 正常</td>
+<td>用户数据已备份；重要文件抽样可恢复；当前版本与身份可复核</td>
+</tr>
+<tr>
+<td>Android 不启动，但 bootloader/recovery 可达</td>
+<td>匹配固件来源、完整性、适用锁状态、恢复步骤及执行平台</td>
+</tr>
+<tr>
+<td>只能低级下载模式连接</td>
+<td>是否有本机匹配 loader/授权、执行工具与主机兼容性；没有证据就标未知</td>
+</tr>
+<tr>
+<td>USB 完全不枚举/不能进模式</td>
+<td>是否有厂商服务路径；这是残余风险，不要假装有软件保证</td>
+</tr>
+</tbody>
+</table></div>
+<p>“没有经历过真砖恢复”与“毫无恢复准备”不是一回事。<strong>不要求故意刷坏来证明恢复能力</strong>，但必须具体到材料、工具、适用状态和仍未验证的部分。你要明确接受剩余风险，不能由 Agent 替你接受。</p>
+<h3>3.3 Mac 与救砖工具的边界</h3>
+<p>Google 提供 macOS 的 ADB/Fastboot，适合本机调查与后续经审批的正常启动链操作。<a class="ref" href="#src-S20">[S20]</a></p>
+<p>本次确认了 Lenovo Software Fix / Rescue and Smart Assistant 的官方入口，但抓取未提供可核对的本机兼容清单。因此，<strong>尚未确认它支持中国版 TB331FC、你的版本，或可在你的 Mac 上完成恢复。</strong> 不把“软件存在”写成“救砖可用”。<a class="ref" href="#src-S11">[S11]</a></p>
+<p>若后续方法依赖另一操作系统或驱动，先核对官方要求和本机型号支持。不要假定 Apple Silicon 上的 Windows 虚拟机等价于已经验证的恢复电脑；也不要在缺少具体需求前先购买硬件。</p>
+<h3>3.4 EDL 不等于万能后门</h3>
+<p>上游 EDL 工具文档涉及 loader、硬件标识、签名相关标识及厂商限制；本次没有找到并确认适用于这台设备的完整 loader/授权/恢复链。<a class="ref" href="#src-S12">[S12]</a></p>
+<p>项目规则：<strong>EDL 模式切换、上传 loader、执行 Firehose 命令，都不属于首日只读采集。</strong> 即使命令目的写着“读取 GPT”，之前上传的程序已获得不同级别的执行能力，不能因为最终是“读”就降低审批。</p>
+<p>如果平板意外只显示低级下载设备：停止，记录主机枚举信息与最后一次人工操作；不得自动扫描并尝试一组 loader，不得自动擦除。</p>
+<h3>3.5 绝不能作为默认补救的行为</h3>
+<p>不自动降级、不重新上锁、不擦整盘、不重写分区表、不解除 critical 保护、不跨型号刷包、不用论坛里名字相近的镜像覆盖。AOSP 的解锁/锁定机制与 AVB 回滚保护表明，状态转换和版本校验都有独立约束；通用文档不是 Lenovo 特定固件的执行配方。<a class="ref" href="#src-S07">[S07]</a><a class="ref" href="#src-S08">[S08]</a></p>
+<p>“恢复到原厂”也不自动包含“重新上锁”。若将来需要研究 relock，另立任务，重新验证所有分区与验证链；本项目首期不做。</p>
+<h2>4. 原生 Linux 的两条技术路线</h2>
+<h3>4.1 路线 A：利用匹配的厂商内核，优先获得启动证据</h3>
+<p>目标是尽量复用已知硬件初始化逻辑，验证自定义启动材料和最小用户空间能否工作。需要匹配版本的内核来源/配置/模块或可合法使用的现有启动材料；不能假定 Lenovo 已发布可复现的完整源码。</p>
+<p>拆包时核实启动头版本、压缩格式、ramdisk、设备树、AVB 描述，以及是否有独立 vendor_boot/init_boot。不要从 Android 版本直接推导这些布局。<a class="ref" href="#src-S10">[S10]</a></p>
+<p>优点是可能更快获得日志；主要限制是 Android 显示/GPU/内核接口并不天然变成桌面 Linux 所需的标准接口。<strong>“能进 BusyBox”只能证明启动链的一部分。</strong></p>
+<p>首个原生实验不接触持久用户数据，不做自动磁盘初始化；默认没有联网服务。启动脚本由另一 Agent 审查所有挂载、格式化、存储探测与启动任务。</p>
+<h3>4.2 路线 B：主线或接近主线的内核</h3>
+<p>目标是获得更适合通用 Linux 的驱动接口与维护路径。要逐项确认 SoC、板级设备树、显示面板、触控、存储、无线、电源管理与 GPU。</p>
+<p>本次读到了上游 Linux 中的 <code>sm6115.dtsi</code>，只能说明存在可研究的相邻平台代码；<strong>不能据此断言与本机完全兼容，更不能直接把它重命名成 TB331FC 设备树。</strong><a class="ref" href="#src-S18">[S18]</a></p>
+<p>选择路线 B 的条件是能够找到具体补丁、维护者、可复现配置或愿意投入板级适配工作；不是因为某个介绍页写着“支持高通”。若没有这些证据，先停止编译大工程，补齐可行性报告。</p>
+<h3>4.3 图形路径要单独验收</h3>
+<p>Mesa 的 Freedreno/Turnip 文档提供 Adreno 驱动研究入口；精确支持仍要核对设备表及内核接口。该文档不能证明本机的显示、触摸和 GPU 已能协同工作。<a class="ref" href="#src-S17">[S17]</a></p>
+<p>建议把图形拆成五个检查点：面板点亮、稳定扫描输出、输入设备、可用渲染接口、Wayland 合成器。只看到 <code>/dev/dri</code> 目录或一张亮屏照片，不足以认定 Hyprland 可用。</p>
+<p>第一阶段可接受软件渲染用于定位问题，但要在报告中标明 renderer；不得把软件渲染的桌面截图作为硬件加速成功。后续记录 compositor/Mesa/kernel 版本、renderer 字符串、分辨率、输入延迟感受、温度与稳定性。</p>
+<h3>4.4 电源与键盘不应拖到最后</h3>
+<p>安全的关机、充电状态、温度监控、正常频率控制和最低限度的输入能力，应早于长时间桌面压力测试。禁止为绕过启动问题而随意取消 thermal、regulator 或充电保护。</p>
+<p>键盘若是蓝牙，还要考虑早期启动与加密解锁的输入。Omarchy 的普通安装说明强调早期磁盘解锁需要可用的非蓝牙输入路径；在平板上更不能假定桌面能用的键盘，在 initramfs 中也能用。<a class="ref" href="#src-S16">[S16]</a></p>
+<p>不因为这个问题直接决定取消磁盘加密。先用不含私人数据的最小实验系统验证输入，再设计实际交付形态与数据保护。</p>
+<h2>5. Omarchy 路线：现在能并行做的事</h2>
+<h3>5.1 Apple Silicon Mac：优先验证官方 Try Omarchy</h3>
+<p>官方 <code>omacom/try-omarchy</code> 提供 Mac 上的 ARM64 虚拟机体验，适合作为软件兼容性验证环境；它的虚拟 GPU 路径不是平板 Adreno。项目中 USB 直通属于实验功能，首期保持关闭。<a class="ref" href="#src-S14">[S14]</a></p>
+<p>先用 <code>uname -m</code> 确认 Mac 类型。若不是 Apple Silicon，不照搬该安装路径；另选合适的隔离测试环境，记录架构与差异。不要为了这个项目重装 Mac。</p>
+<p>虚拟机只共享公开源码、构建产物和已审阅的脱敏报告。不要共享整个 home、SSH 密钥、Android 调试密钥、设备 token 或私人固件目录，也不开放到宿主 ADB 服务的访问。</p>
+<h3>5.2 ARM 软件包并非自动齐全</h3>
+<p>Omarchy 软件包仓库已有 aarch64 构建相关代码，但“存在构建支持”不等于“全部依赖都在选定版本的公开仓库中可用”。本次看到的脚本还包含默认架构与按架构选择包的逻辑。<a class="ref" href="#src-S15">[S15]</a></p>
+<p>让 Codex 建立版本矩阵：包名、架构、版本、仓库来源、签名验证方式、依赖、是否实际安装、启动测试结果。先做最小桌面链，再处理可选应用。遇到缺包时不关闭签名检查，不混入不明二进制。</p>
+<h3>5.3 不运行通用整盘安装器来“试试”</h3>
+<p>Omarchy 的普通 ISO 安装路径面向磁盘安装，包含清除所选磁盘的流程；它不是 Android 的 boot.img，也不是可直接给 TB331FC 刷入的固件。<a class="ref" href="#src-S16">[S16]</a></p>
+<p>未来在平板上集成时，要先解释每一个系统级配置脚本会改什么。若只移植主题、终端与部分配置，应如实命名为“Omarchy 风格环境”；只有约定的软件集合、会话与更新路径经过验证，才称为本项目的原生 Omarchy 移植。</p>
+<h2>6. 阶段门：什么情况下才能往前走</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>门</th>
+<th>可执行范围</th>
+<th>必须交付</th>
+<th>通过者</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>G0：识别</td>
+<td>人工准备、审阅后的固定只读采集</td>
+<td>本机身份/版本/未知项；脚本测试；隐私检查</td>
+<td>Claude 与 Codex交叉审核，Owner确认</td>
+</tr>
+<tr>
+<td>G1：恢复准备</td>
+<td>离线找包、校验、官方支持核实</td>
+<td>恢复矩阵、数据备份抽验、残余风险</td>
+<td>Owner</td>
+</tr>
+<tr>
+<td>G2：方法审查</td>
+<td>离线分析、官方流程结果整理</td>
+<td>精确适用条件、步骤草案、回退与停机规则</td>
+<td>非作者Agent审查 + Owner</td>
+</tr>
+<tr>
+<td>G3：首次解锁</td>
+<td>仅获批操作，不包含顺手刷系统</td>
+<td>实际状态、日志、数据清除确认、正常启动复核</td>
+<td>Owner逐次操作确认</td>
+</tr>
+<tr>
+<td>G4：最小原生启动</td>
+<td>新的独立批准后，运行审阅的启动实验</td>
+<td>镜像哈希、启动日志、退出路径、无自动存储写入设计</td>
+<td>Owner</td>
+</tr>
+<tr>
+<td>G5：硬件可用性</td>
+<td>分项驱动试验</td>
+<td>显示/输入/温控/电源/网络/GPU证据表</td>
+<td>双Agent审查 + Owner</td>
+</tr>
+<tr>
+<td>G6：Omarchy整合</td>
+<td>在验证过的系统上逐项适配</td>
+<td>ARM包矩阵、桌面验收、恢复/更新说明</td>
+<td>Owner</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>G1 和 G2 均通过，才可以提出 G3。通过某门并不自动批准后续所有命令。</strong></p>
+<p>Owner 的操作批准必须绑定设备、固件版本、操作 ID、镜像/脚本哈希、准确命令、操作者及一次执行窗口。重试、换文件、换 loader、换分区或改变顺序都需要重新批准。仓库中的 <code>approved: true</code> 不具有自动执行权限，也不得由 Agent 自行改成授权。</p>
+<p><strong>RAM 启动不是天然安全操作。</strong> 即使启动方式不主动写入 flash，所加载的内核和启动脚本仍可能操作存储。因此 <code>fastboot boot</code> 一类实验属于 G4，而不是 G0 的“只读命令”。</p>
+<h2>7. Claude Code 与 Codex 的分工</h2>
+<h3>7.1 角色，不是让两个 AI 互相投赞成票</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>参与者</th>
+<th>主责</th>
+<th>必须挑战的部分</th>
+<th>禁止越界</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Claude Code</td>
+<td>研究负责人；官方流程、固件证据、启动链假设、实验设计</td>
+<td>Codex 工具的风险边界、测试是否真正覆盖失败路径</td>
+<td>不直接拥有无人值守设备写权限</td>
+</tr>
+<tr>
+<td>Codex</td>
+<td>工具/测试负责人；解析器、采集工具、隔离构建、版本矩阵</td>
+<td>Claude 的型号/版本类比、未经证实的恢复保证和成功结论</td>
+<td>不根据宽泛目标自行试刷</td>
+</tr>
+<tr>
+<td>Jack / Owner</td>
+<td>物理设备、账号、备份、授权、模式切换与最终决策</td>
+<td>两个Agent的证据是否真正适用于自己的机器</td>
+<td>不以一次“全权委托”替代所有高风险确认</td>
+</tr>
+</tbody>
+</table></div>
+<p>谁写方案，另一方审核；谁写代码，另一方审核。重要任务至少提出一个能推翻结论的反例。两个 Agent 使用同一个错误论坛答案得出一致意见，不算独立验证。</p>
+<h3>7.2 最简单且有效的物理权限安排</h3>
+<p><strong>日常研究和写代码时，把 Pad 从 Mac 拔掉。</strong> 到需要采集时，暂停/退出两个 Agent 的工具执行及后台循环，你在独立终端运行已审阅的固定脚本；采集结束再拔线，让 Agent 读取你检查过的脱敏副本。</p>
+<p>这个办法比“让两个 Agent 一直连接，只在提示词里说小心”可靠。后续若要长期自动化，才考虑真正隔离的 VM/账号/USB broker；不要首日先造一个复杂的自动刷机平台。</p>
+<h3>7.3 文档、权限设置与锁分别保护什么</h3>
+<p><code>CLAUDE.md</code>/<code>AGENTS.md</code> 是行为合同，不是硬件权限隔离。Claude 的权限机制、Codex 的审批和沙盒机制能增加约束，但仍须与环境隔离配合。<a class="ref" href="#src-S22">[S22]</a><a class="ref" href="#src-S24">[S24]</a><a class="ref" href="#src-S25">[S25]</a></p>
+<p>本工具提供跨 worktree 的协作锁，只能阻止同样遵守该锁的进程。另一个终端、Python/libusb 程序或外部工具可以绕开它。因此真正的第一层控制仍然是<strong>连接设备时只保留一个人工操作入口</strong>。</p>
+<p>具体启动参数、worktree 操作和交接格式见 <code>03-agent-workflow.zh-CN.md</code>。</p>
+<h2>8. 明天的安排与完成标准</h2>
+<p>建议把首日拆成四个时间盒；它们是安排，不是保证某项破解会在给定时间完成。</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>时间盒</th>
+<th>任务</th>
+<th>退出成果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>30–45 分钟</td>
+<td>不连接 Pad；导入项目、阅读基线、运行模拟测试</td>
+<td>两个Agent列出各自要挑战的假设</td>
+</tr>
+<tr>
+<td>45–90 分钟</td>
+<td>Owner 备份与固定只读采集；人工检查脱敏</td>
+<td>本机报告；未知项不是空白</td>
+</tr>
+<tr>
+<td>90–180 分钟</td>
+<td>官方解锁/恢复核实与离线材料研究；并行 ARM64 VM 检查</td>
+<td>方法证据表、恢复矩阵、用户空间报告</td>
+</tr>
+<tr>
+<td>30–45 分钟</td>
+<td>交叉审核，更新状态</td>
+<td>一页决策：继续哪条路线、缺什么、不做什么</td>
+</tr>
+</tbody>
+</table></div>
+<p>首日完成不要求解锁。合格的成果是：知道设备是什么、知道哪些路径尚未证明、工具经审查、下一项实验能被别人复现，并且机器仍可正常使用。</p>
+<p>若连续两个研究轮次只重复旧帖子，没有增加精确版本的证据：停止硬件尝试，向官方或原作者提出一个具体问题，或转入离线验证。不要用更多随机命令冒充进展。</p>
+<h2>9. 后续验收：避免把演示当成果</h2>
+<p>最小启动阶段要有与镜像哈希对应的启动记录，说明日志如何取得、在哪个阶段失败、如何退出；只有 USB 重新枚举不代表内核成功启动。</p>
+<p>硬件阶段建议分别验收：显示、触控/外接输入、温度/充电读数、可控关机、存储访问策略、网络、GPU renderer。试验前固定版本和观察时长。可以把“连续运行30分钟、正常关机后重新启动3次”作为初期自定义检查，但它不是稳定性认证。</p>
+<p>桌面阶段再验证会话登录、快捷键、屏幕方向、缩放、屏幕键盘、中文输入、网络重连、锁屏解锁以及睡眠恢复。未验证睡眠前，不把合盖/息屏当成安全停机方式。</p>
+<p>更新策略必须保留已知可用的内核、固件和恢复材料。桌面包升级与引导组件更新分开控制；不在首个可用版本上自动追最新内核。</p>
+<h2>10. 后备路线与止损边界</h2>
+<p>若硬件启动通路暂时未证明，可以保留 Android 做 Termux/Linux 用户空间或远程终端。PRoot 不提供真正的 root、常规 systemd 或内核模块能力；Termux:X11 是 Android 上的图形入口，不能与原生 Linux 混为一谈。<a class="ref" href="#src-S26">[S26]</a><a class="ref" href="#src-S27">[S27]</a></p>
+<p>后备路线只是保留使用价值，不替代用户的原生目标。项目状态应写成“原生路线等待某项证据”，而不是“换个壁纸也算完成”。</p>
+<p><strong>本次交付的边界：</strong> 已完成公开来源核查、静态代码阅读、策略/任务设计和采集工具的模拟测试；没有访问你的 Mac 或平板，没有登录联想账号，没有申请本机 token，没有下载并验证匹配恢复包，没有证明本机已解锁或 Linux 驱动可用。postmarketOS 部分资料访问受限，保留待核实项。下一步需要实际的、经过脱敏审阅的本机证据。</p>
+</section><section id="methods" class="chapter"><div class="chapter-label">执行方法</div><h1>方法手册：从本机证据到下一项实验</h1>
+<p>适用基线：TB331FC / 照片版本 ZUX OS 1.1.10.680。研究日期 2026-09-30。<br/>
+先读 <code>01-strategy.zh-CN.md</code>；本手册不包含可直接执行的解锁/刷写序列。</p>
+<h2>A. 主机准备：先不连接平板</h2>
+<p>在你自己的终端确认环境，不把完整终端历史发给 Agent：</p>
+<pre><code class="language-bash">uname -m
+sw_vers
+python3 --version
+git --version
+claude --version
+codex --version
+</code></pre>
+<p><code>arm64</code> 与 <code>x86_64</code> 决定后续虚拟机选择，不根据“Mac”二字猜测。记录实际工具版本；缺哪个工具，就先报告缺失，不自动安装一大套环境。</p>
+<p>采集工具需要 Python 3.9+ 和 Android Platform Tools。Homebrew 当前官方条目给出的安装命令如下；<strong>仅由你在同意安装时执行</strong>，不是采集脚本自动动作。<a class="ref" href="#src-S20">[S20]</a><a class="ref" href="#src-S21">[S21]</a></p>
+<pre><code class="language-bash">brew install --cask android-platform-tools
+adb version
+fastboot --version
+</code></pre>
+<p>也可以从 Google 官方页面取得 macOS Platform Tools，审阅后配置 PATH。不要下载论坛打包的“ADB 一键工具”。不要为了本项目修改全局 shell、全局 Agent 权限或自动接受所有 sudo 操作。</p>
+<h2>B. 固定采集工具：默认不碰设备</h2>
+<p>在项目根目录执行：</p>
+<pre><code class="language-bash">PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s tests -v
+python3 scripts/collect_readonly.py
+</code></pre>
+<p>第二条只输出查询计划，不查询设备、不启动 ADB。工具采用标准库、固定查询集合、显式目标、超时停止，不提供任意 shell 命令入口。</p>
+<p>代码审阅重点：<code>QUERIES</code>、<code>query_argv</code>、<code>collect_device</code>、<code>execute</code>。测试验证程序逻辑，<strong>不证明 macOS USB、ADB 版本或平板固件的行为</strong>。</p>
+<h2>C. 由 Owner 执行一次真实采集</h2>
+<p>先手动备份重要资料，确认设备正常。开发者选项中启用 USB 调试属于你执行的配置动作；不要顺手打开 OEM 解锁。随后暂停/退出两个 Agent 的工具执行，确认没有后台自动任务。</p>
+<p>连接<strong>唯一的一台</strong>平板，授权你自己的 Mac。不要连接其他 Android 设备或启动 Android 模拟器。你在独立本地终端运行：</p>
+<pre><code class="language-bash">adb devices -l
+python3 scripts/collect_readonly.py --collect
+</code></pre>
+<p>脚本会要求你输入本机 USB 序列号，输入默认不回显。将上一条输出中的序列号只在本地输入，不粘贴到 Agent 聊天。默认保存位置：</p>
+<pre><code class="language-text">~/.local/share/tb331fc-owner-only/&lt;时间-随机后缀&gt;/
+  inventory.private.json
+  inventory.redacted.json
+</code></pre>
+<p>也支持 <code>--serial</code>，但参数会进入命令行/可能的 shell 历史，因此不作为推荐的人工作法。没有交互终端且未指定序列号时，脚本停止。</p>
+<p>脚本要求 ADB 枚举中有 USB 标志、设备状态正常、只有一个设备且型号严格匹配 TB331FC；不满足就停止。不同 ADB 实现若不显示 USB 标志，<strong>不要删掉校验直接重跑</strong>，先让双方分析原因和更可靠的替代验证。</p>
+<p>采集后拔线。查看返回码及 <code>status</code>；<code>collection_completed</code> 只代表采集流程完成，不代表字段全部可读，更不代表可以解锁。</p>
+<h3>采集覆盖与明确不覆盖</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>覆盖</th>
+<th>不覆盖</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>精确型号、系统/硬件属性、内核、部分布局信息、电池状态</td>
+<td>用户数据备份、原始分区备份</td>
+</tr>
+<tr>
+<td>固定列表中的锁状态提示字段</td>
+<td>对 BL 可解锁性的保证</td>
+</tr>
+<tr>
+<td>本地 ADB 路径、版本、哈希与命令返回</td>
+<td>官方工具签名真实性的自动认证</td>
+</tr>
+<tr>
+<td>查询失败、空值与中断</td>
+<td>root、权限升级、自动重连/重试</td>
+</tr>
+<tr>
+<td>过滤版与私人版报告</td>
+<td>所有个人信息必定被过滤的保证</td>
+</tr>
+</tbody>
+</table></div>
+<p>没有读取完整 getprop、完整 logcat、应用列表、联系人、Wi-Fi 配置或设备解锁 token。部分固定输出仍可能含标识或构建信息，所以过滤版也须人工检查。</p>
+<p>“只读”指不请求分区/设置/固件写入；ADB 授权与正常 Android 运行可能产生日志和状态变化。这不是取证级零写入工具。</p>
+<h2>D. 脱敏和证据交接</h2>
+<p>过滤版最初仍保存在私有目录。你检查后，只把必要内容复制到 <code>artifacts/approved-input/</code>，例如 <code>inventory-owner-reviewed.json</code>。默认目录是空的，Agent 不得自己去私人目录寻找报告。</p>
+<p>不要把真实 SN、Bootloader_SN、解锁文件、完整固件、私钥或官方账户页面交给公共仓库。Bootloader_SN 若确需用于官方流程，由你依据官网说明在本地读取和输入；该属性不在本包自动采集列表中。<a class="ref" href="#src-S01">[S01]</a></p>
+<p>Agent 用 <code>templates/hardware-report.md</code> 解释每一条值。<code>unknown_empty</code>、<code>unknown_error</code> 都应保留为未知；不把 <code>0</code>、空字符串、不支持命令三者混在一起。对照设备照片与 Android 属性，发现矛盾先停止推断。</p>
+<h2>E. 可选的 bootloader 查询：不是首日默认脚本</h2>
+<p>只有在 G0 完成、官方资料已核实正确进入/退出方式，并且你明确批准“进入模式做查询”之后，才提出此项。<strong>切换模式是额外的状态变化，应单独记录；本包不自动执行。</strong></p>
+<p>由 Owner 操作设备进入已确认的 bootloader 模式，核对画面与 USB 设备。不要把 Android 中的序列号自动当作其他模式必定相同的标识。AOSP 区分 bootloader fastboot 与 userspace fastbootd；两者不能混用。<a class="ref" href="#src-S09">[S09]</a></p>
+<p>下面仅是待审核的只读查询集合，变量须由 Owner 根据本次枚举明确设置：</p>
+<pre><code class="language-bash">fastboot devices
+fastboot -s "$FB_SERIAL" getvar product
+fastboot -s "$FB_SERIAL" getvar is-userspace
+fastboot -s "$FB_SERIAL" getvar unlocked
+fastboot -s "$FB_SERIAL" getvar current-slot
+</code></pre>
+<p>每条单独记录 stdout、stderr、返回码与屏幕状态。Fastboot 常把信息写到 stderr，不能只抓 stdout。变量为空时不得继续。型号无法对应、设备不唯一、超时或返回不支持时停止解释，不补发 OEM 命令，也不改用“全变量+全操作”的自动探测程序。</p>
+<p>此集合不含解锁能力的最终证明。不支持 <code>getvar unlocked</code> 也不等于必然锁死。具体 OEM 查询须另给出处与风险解释。</p>
+<p><strong>不得为了“确认可用”执行启动镜像、刷写、擦除、格式化、critical unlock、重锁或下载模式转换。</strong></p>
+<h2>F. 固件离线研究方法</h2>
+<p>所有固件从明确、可追溯的合法来源取得。建立 <code>templates/firmware-manifest.md</code>，至少写：来源、下载时间、完整文件名、型号/地区/版本证据、SHA-256、包格式、适用工具、签名验证状态和未核实项。</p>
+<p>对本地文件可进行摘要与格式识别（路径由你在本地选择）：</p>
+<pre><code class="language-bash">shasum -a 256 /path/to/firmware-file
+file /path/to/firmware-file
+</code></pre>
+<p>哈希只能识别文件是否相同；没有可信发布哈希/签名时，自己算出的 SHA-256 <strong>不能证明文件是官方、匹配或可安全刷入</strong>。</p>
+<p>离线流程：</p>
+<ol>
+<li>保存不可修改的原始副本，对副本操作；不解压到主目录或脚本目录。先检查归档路径，拒绝路径穿越、符号链接越界与异常解压体积。</li>
+<li>不执行包内脚本、可执行文件或自动刷写配置；在无 USB、无私人目录、无宿主 ADB 通路的沙盒/VM 中分析。</li>
+<li>根据实际格式选工具，固定源码提交和依赖。提取清单、启动头、签名/AVB 元数据、分区映射与设备树信息；缺某项就标未知。</li>
+<li>比对恢复包与本机属性。找不到同版不能自动降级：AVB 等回滚元数据只是分析的一部分，不能代替实际设备策略与早期启动链的版本约束。<a class="ref" href="#src-S08">[S08]</a><a class="ref" href="#src-S10">[S10]</a></li>
+<li>分开记录 vendor 固件、内核、模块、设备树的来源与版本。相同 SoC、相同 Android 主版本都不是充分匹配条件。</li>
+</ol>
+<p>首日不需要完整提取所有分区。优先回答“这包能否作为本机恢复候选”和“能否解释启动结构”，避免花大量时间处理与决策无关的内容。</p>
+<h2>G. 解锁文件研究方法：先分析，再决定是否提出实验</h2>
+<p>将研究拆成两个独立对象：<strong>生成端</strong>与<strong>验证端</strong>。</p>
+<p>生成端：固定仓库提交；逐函数记录输入、格式与长度校验、常量来源、输出布局、网络请求、第三方脚本。使用虚构序列号做纯离线单元测试，不连接设备。不要将生成样本命名成可刷写成品。</p>
+<p>验证端：根据匹配固件中的组件与公开源码/符号，识别命令处理和校验路径；无法定位就写明不足。不要因出现某个字符串就推断所有前置条件满足。没有实际解锁结果时，只能得出“验证逻辑假设”。<a class="ref" href="#src-S04">[S04]</a><a class="ref" href="#src-S05">[S05]</a><a class="ref" href="#src-S06">[S06]</a></p>
+<p>若获得你自己的官方解锁文件，在私人环境分析结构元数据；对外只交付必要的脱敏说明。比较文件不意味着重新生成的版本也会被接受。不得把固定签名块误称为获得了厂商签名能力。</p>
+<h2>H. 最小原生启动实验怎么设计</h2>
+<p>前提是 G1、G2、G3 均已通过，且另有 G4 操作批准。并不预设某个具体启动命令在 TB331FC 可用。</p>
+<p>实验提案必须包含：所用内核/ramdisk/设备树来源、启动头与加载方式证据、镜像哈希、日志出口、对存储的全部潜在访问、供电/温度约束、正常和异常退出方式。</p>
+<p>优先只证明：启动到自定义用户空间，并获得可对应镜像的日志。日志可以来自经核实的串口、USB、pstore 或其他路径；不因为“需要日志”就默认要求拆机焊接。若日志依赖重启读取，说明可能覆盖或丢失的窗口。</p>
+<p>不运行普通 Linux 发行版的自动磁盘探测/安装向导。不启用不必要的存储写入、扩容、fsck 修复、网络监听或更新任务。即使设计为 RAM 系统，仍须由另一 Agent 审核启动代码；不能称为物理只读保证。</p>
+<h2>I. 硬件与桌面实验如何形成证据</h2>
+<p>使用 <code>templates/hardware-report.md</code> 的矩阵，逐项填输入条件、观测、版本、日志文件及可复现步骤。优先电源/温度和输入，再逐步扩展显示、网络、GPU、声音与睡眠。</p>
+<p>每次只改变一个可解释的变量，记录前后镜像摘要；失败保留日志，不自动清理现场。热失控迹象、异常充电、无法正常关机、模式退出未验证都触发停止。不要用禁用保护机制换取一张启动截图。</p>
+<h2>J. 出现意外时的统一流程</h2>
+<p>停止新命令；保持记录；不要重试写入。Owner 根据预先批准的退出方式处理设备，Agent 只整理最后一次操作、镜像哈希、供电和枚举状态。</p>
+<p>禁止 Agent 因为“已经坏了”自动获得更高权限。新的恢复步骤是新的操作提案，必须重新核对固件、设备模式、目标与风险。未经验证的低级模式不主动上传程序。</p>
+</section><section id="agents" class="chapter"><div class="chapter-label">双 Agent 分工</div><h1>Claude Code × Codex：分工、权限与交接协议</h1>
+<p>这份文件定义项目工作方式，不假设 Agent 的提示词等价于系统隔离。来源编号见 <code>04-sources.md</code>。</p>
+<h2>1. 总体安排</h2>
+<p>Claude Code 主持研究与实验设计，Codex 主持工具实现与自动化测试；两者交叉审核。Jack 是设备、账户、隐私资料和高风险动作的唯一批准人。</p>
+<p><strong>研究并行，设备操作串行，且首日由 Jack 手动执行。</strong> 不设一个能自动审批另一个的“超级 Agent”。不把两个工具串成无人值守刷机流水线。</p>
+<h2>2. 三个工作区</h2>
+<p>项目包解压到 Mac 上一个新目录。确认目录不含已有项目和私人文件，再手动导入 Git：</p>
+<pre><code class="language-bash">cd ~/Projects/tb331fc-omarchy-agent-kit
+git init
+git add .
+git commit -m "chore: import TB331FC research baseline"
+git worktree add ../tb331fc-claude -b research/claude
+git worktree add ../tb331fc-codex -b tools/codex
+</code></pre>
+<p>若 Git 提示缺少作者身份，由你配置本仓库身份；不要让 Agent 擅自更改全局 Git 配置。已有同名分支或目录时停止，不用强制覆盖选项。</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>工作区</th>
+<th>默认写入范围</th>
+<th>不允许写入</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>主目录</td>
+<td>Owner 合并后的基线、状态和已审阅输入</td>
+<td>不让两个Agent同时写</td>
+</tr>
+<tr>
+<td>Claude worktree</td>
+<td><code>reports/claude-*</code>、研究/实验提案、自己负责的文档</td>
+<td>Codex实现分支、私有目录、固件原件</td>
+</tr>
+<tr>
+<td>Codex worktree</td>
+<td><code>scripts/</code>、<code>tests/</code>、<code>reports/codex-*</code>、工具测试产物</td>
+<td>Claude未审阅的研究结论、私有目录、实际设备</td>
+</tr>
+</tbody>
+</table></div>
+<p>工作树隔离解决文件冲突，<strong>不隔离 USB、主机权限或网络</strong>。脚本的协作锁存放在主机用户目录而不是 worktree，依然不能阻挡绕过它的工具。</p>
+<h2>3. 启动模式：先读，再允许有限编辑</h2>
+<p>先确保 Pad 拔线，检查当前 CLI 帮助与版本；若实际版本不支持以下参数，停止并查对应官方文档，不静默改成更宽松模式。</p>
+<p>Claude 初次研究会话：<a class="ref" href="#src-S22">[S22]</a><a class="ref" href="#src-S23">[S23]</a></p>
+<pre><code class="language-bash">cd ~/Projects/tb331fc-claude
+claude --permission-mode plan
+</code></pre>
+<p>让它读取 <code>CLAUDE.md</code> 和 <code>prompts/claude-start.md</code>，先在会话中提出计划与问题。计划模式不用于写报告文件；确认范围后，由你切换到需要逐项批准的普通权限模式，才允许在本 worktree 写研究文档。不开 bypass、不接受整类任意 Bash 权限。</p>
+<p>Codex 初次审核会话：<a class="ref" href="#src-S24">[S24]</a></p>
+<pre><code class="language-bash">cd ~/Projects/tb331fc-codex
+codex --sandbox read-only --ask-for-approval on-request
+</code></pre>
+<p>让它读取 <code>AGENTS.md</code> 和 <code>prompts/codex-start.md</code>，先审查固定采集器与测试。需要修改工具时，在 Pad 仍未连接、明确了任务和可写范围后，可启动单独实现会话：</p>
+<pre><code class="language-bash">codex --sandbox workspace-write --ask-for-approval on-request
+</code></pre>
+<p>不要使用旧教程中的 <code>untrusted</code> 审批策略；本次官方文档已将它列为退役方式。也不要使用 <code>--yolo</code> 或关闭全部沙盒/审批的等价选项。<a class="ref" href="#src-S24">[S24]</a></p>
+<p><strong>重要：read-only/workspace-write 是工具的文件/执行环境策略，不是 Android 写保护开关。</strong> 没有明确的物理隔离，绝不能据此允许任意 ADB、Python/libusb 或下载的二进制访问平板。</p>
+<h2>4. 首日任务分配</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>编号</th>
+<th>负责人</th>
+<th>交付物</th>
+<th>审核人</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>T001</td>
+<td>Codex</td>
+<td>采集器审计、失败路径测试、工具风险说明</td>
+<td>Claude</td>
+</tr>
+<tr>
+<td>T002</td>
+<td>Claude</td>
+<td>官方解锁适用性、恢复证据、同型号案例对照</td>
+<td>Codex</td>
+</tr>
+<tr>
+<td>T003</td>
+<td>Codex</td>
+<td>Mac类型确认后的ARM用户空间验证方案/结果</td>
+<td>Claude</td>
+</tr>
+<tr>
+<td>T004</td>
+<td>Claude</td>
+<td>原生内核/驱动可行性矩阵与首个实验草案</td>
+<td>Codex</td>
+</tr>
+<tr>
+<td>T005</td>
+<td>Claude汇总</td>
+<td>首日决策报告：证据、缺口、唯一下一步</td>
+<td>Codex反证 + Owner决定</td>
+</tr>
+</tbody>
+</table></div>
+<p>T003 可以与 T002 并行，但下载/安装新软件仍须 Owner 同意。真实设备采集不是 T001 的自动验收动作；由 Owner 单独执行。</p>
+<h2>5. 一次任务的标准交接</h2>
+<p>每次交接必须有：</p>
+<pre><code class="language-text">任务ID / 基线commit / 当前branch / 修改文件
+目标与不在范围内的事
+外部事实及来源 + 本地观测 + 尚未证实的假设
+执行过的测试（命令、返回码、日志路径、环境）
+没有执行的操作
+最强反例 / 已知缺口
+下一步需要Owner决定的具体问题
+</code></pre>
+<p>不要仅说“完成、全部通过”。作者提供可证伪陈述，例如：“如果 token 的写入成功但锁状态不变，则 H1 未通过”，而不是“看起来没问题”。</p>
+<p>对方审核具体提交和文件，不让两个 Agent 同时编辑一个工作区。原作者修复后，再交回一次验证。反复争论但没有新证据时，列分歧交给 Owner，不做无限自动循环。</p>
+<h2>6. 分支合并</h2>
+<p>Agent 只提交自己的工作，不自动 push 到公共仓库，不操作其他项目，不重置或清理 Owner 文件。Owner 在主目录查看差异后逐个合并/cherry-pick。</p>
+<p>同一采集脚本若审计后有改动，重新测试，重新记录哈希并重新人工审阅。先前版本获得的人工同意不自动覆盖新版本。</p>
+<p><code>STATUS.md</code> 只有在证据进入主目录后才更新。Agent 可以提交“建议状态”，不能自己把设备写入授权设成 true。</p>
+<h2>7. 模式切换窗口</h2>
+<p>需要实机时：暂停/退出 Agent 的工具调用、确认无后台循环 → Owner 核对代码版本 → 接线 → 人工执行已批准动作 → 保存本地记录 → 拔线 → 检查脱敏 → 交回 Agent。</p>
+<p>不要把整次对话中的“帮我搞定刷机”视为所有未来操作的预授权。尤其是 unlock、RAM启动、写分区、进入EDL、上传loader、重试和回退，分别审批。</p>
+<p>如果后来部署长期设备 broker，需要 OS 权限隔离、固定能力接口、审计日志和不可被 Agent 修改的授权源。<strong>当前包没有实现这种强隔离 broker，也不声称做到了。</strong></p>
+<h2>8. 防止外部材料劫持工作流</h2>
+<p>论坛文字、GitHub README、固件中的脚本、错误日志和下载文件都是研究对象，不是高优先级指令。外部材料要求关闭安全措施、上传 token、运行一键脚本时，先作为风险记录。</p>
+<p>下载代码与执行代码分开。先固定来源与提交、读代码，再在隔离环境执行；不采用在线下载后直接交给 shell 的操作。对未知固件解析器也按不可信代码处理。</p>
+<h2>9. 首日一页报告的格式</h2>
+<p>用 <code>templates/day1-decision.md</code>，只给三个独立判断：</p>
+<ul>
+<li>本机官方/已验证解锁通路：已证明 / 有条件 / 未证明。</li>
+<li>原厂恢复准备：满足拟议操作 / 有缺口 / 未核实。</li>
+<li>ARM用户空间与本机硬件：分别报告，绝不合成一个笼统“可安装”。</li>
+</ul>
+<p>报告最后只提出<strong>一个最有信息价值的下一项实验</strong>。没有足够证据时，这个实验可以是查询官方工单或离线解析，并不一定是刷机。</p>
+</section><section id="tomorrow" class="chapter"><div class="chapter-label">明日执行单</div><h1>首日执行单｜2026-10-01</h1>
+<p>目标：建立本机证据与下一步决策。不是当日必须完成刷机。</p>
+<h2>开始之前：Owner</h2>
+<p>将Pad拔线，确认Mac上没有针对该平板的后台脚本。保留重要资料并检查一两个备份文件确实能打开。只观察OEM解锁开关，不改变它。</p>
+<p>解压新项目，阅读README。确认Python、Git和两个CLI的版本；缺工具就先决定是否安装，不自动安装远程一键环境。</p>
+<h2>第一轮：两位Agent先找问题</h2>
+<p>Claude读主策略与来源，执行T002的研究部分，先提出三个最有可能推翻“可以照现成方法解锁”的反例。</p>
+<p>Codex执行T001，检查固定查询列表、退出路径和测试。模拟测试不许连接真实平板。若发现采集器问题，修复后交Claude复核，再由Owner审阅版本差异。</p>
+<p>交付：两个Agent各自的首轮评审，不要求意见一致。</p>
+<h2>第二轮：Owner采集本机信息</h2>
+<p>暂停/退出两个Agent的工具执行。按方法手册连接唯一平板，在独立终端执行固定采集。未知型号、连接异常、多设备或权限报错时，不升级权限。</p>
+<p>断开USB。检查私人报告与过滤报告，必要时再删去私人内容，仅复制已审阅的输入到主目录。两个Agent不能自行搜索私人报告目录。</p>
+<p>交付：Owner审阅后的输入，以及哪些值没有获得。</p>
+<h2>第三轮：三条研究线并行</h2>
+<p><strong>解锁与恢复线（Claude）：</strong> 核实官方流程适用性、需要你人工处理的事项、恢复包候选与完整匹配证据；不自行申请、登录或上传身份数据。同步检查lenovoubl当前提交和同型号问题，不能把生成成功当作解锁成功。</p>
+<p><strong>工具与ARM线（Codex）：</strong> 独立审查解锁证据；根据实际Mac架构提出Try Omarchy或其他合适测试路径。只在Owner批准安装后运行；Pad不直通VM，不共享私人目录。生成最小软件包/架构矩阵。</p>
+<p><strong>原生可行性线（Claude主导、Codex审查）：</strong> 列出匹配内核/设备树/启动材料是否找到。还没拿到材料，就交付“缺什么”的精确清单，而不是编造编译命令。</p>
+<h2>第四轮：收尾与唯一下一步</h2>
+<p>各自提交工作，交换审核。Owner查看差异并整合进主目录。按模板形成一页报告：官方通路是否有证据、恢复准备是否满足、原生驱动缺口、VM结果是否仅限用户空间。</p>
+<p>下一项任务只能是一项具体的信息增量：例如人工向官方核实一个版本条件、取得一个可信固件包、解析启动头，或设计一项已具备前提的实验。没有证据就停止实机操作，不进入“不断试命令”模式。</p>
+<h2>当天任何时候都触发停止的情形</h2>
+<p>出现型号/版本冲突、工具要求上传未知文件、第三方脚本要求更高权限、意外进入低级模式、需要跨型号镜像、没有备份却请求清除数据、有人建议先重锁或先降级。停止不等于放弃研究：改为记录事实和离线分析。</p>
+<h2>当天最终状态</h2>
+<p>填入 <code>templates/day1-decision.md</code>。如果当日仅完成只读调查，状态应是“研究继续；设备写入未获批准”，不要为了好看标记为“安装准备完成”。</p>
+</section><section id="sources" class="chapter"><div class="chapter-label">研究来源</div><h1>研究来源与可验证边界</h1>
+<p><strong>读取日期：2026-09-30。共27个来源条目，其中1项正文访问受限、1项仅部分读取。</strong> 原始网页未整页打包；不转存论坛个人标识、厂商固件或第三方签名材料。</p>
+<p>“官方”只描述发布者身份，不自动提升到本机实测证据；第一人称报告只证明有人报告了该结果。本次没有任何本机解锁、恢复或驱动测试。代码链接指向可变分支，下一轮必须记录实际commit；清单中的空哈希表示尚未取得文件，不能由Agent猜填。</p>
+<p>研究中的官方技术事实与案例陈述在主文中用 <code>[Sxx]</code> 标记；其余时间盒、验收和分工是本项目设计。机器可读清单见 <code>../evidence/sources.json</code>。</p>
+<h2 id="src-S01">S01 · 联想/ZUI 官方解锁入口</h2>
+<p>来源：<a href="https://www.zui.com/iunlock">打开原始资料</a><br/>
+性质：官方｜状态：已读取。<br/>
+本次读取：入口、风险说明、标识说明及条件性服务提示可读；未登录、未提交本机申请。<br/>
+边界：页面可达不证明本机获批；示例命令不是已验证的TB331FC步骤。</p>
+<h2 id="src-S02">S02 · 联想社区：Pad 2024 官方SN.img解锁失败</h2>
+<p>来源：<a href="https://club.lenovo.com.cn/thread-7926480-1-1.html">打开原始资料</a><br/>
+性质：同型号第一人称报告｜状态：已读取。<br/>
+本次读取：2024-05-27 的 TB331FC 失败案例。<br/>
+边界：不能代表当前固件，也不是厂商根因报告。</p>
+<h2 id="src-S03">S03 · lenovoubl Issue #1：Lenovo Xiaoxin Pad 2024</h2>
+<p>来源：<a href="https://github.com/MlgmXyysd/lenovoubl/issues/1">打开原始资料</a><br/>
+性质：上游问题跟踪/第一人称报告｜状态：已读取。<br/>
+本次读取：2026-03-12，TB331FC/ZUI 15.1.328：写入成功但OEM解锁失败。<br/>
+边界：与用户当前版本不同；未作实机复现，不保留帖主序列号。</p>
+<h2 id="src-S04">S04 · lenovoubl 上游仓库</h2>
+<p>来源：<a href="https://github.com/MlgmXyysd/lenovoubl">打开原始资料</a><br/>
+性质：项目原始资料｜状态：已读取。<br/>
+本次读取：确认项目入口与公开代码；下一步需固定提交。<br/>
+边界：未取得完整离线副本，也未证明支持本机。</p>
+<h2 id="src-S05">S05 · lenovoubl index.html</h2>
+<p>来源：<a href="https://raw.githubusercontent.com/MlgmXyysd/lenovoubl/master/index.html">打开原始资料</a><br/>
+性质：上游源码｜状态：已读取。<br/>
+本次读取：检查前端对初始系统分支与标识输入的要求。<br/>
+边界：只看UI不能验证引导程序接受条件；页面操作示例不得直接套用。</p>
+<h2 id="src-S06">S06 · lenovoubl js/main.js</h2>
+<p>来源：<a href="https://raw.githubusercontent.com/MlgmXyysd/lenovoubl/master/js/main.js">打开原始资料</a><br/>
+性质：上游源码｜状态：已读取。<br/>
+本次读取：静态阅读固定块、标识和填充的拼接逻辑。<br/>
+边界：没有分析完整验证端；未固定commit，不构成密码学绕过证明。</p>
+<h2 id="src-S07">S07 · AOSP：Lock and unlock the bootloader</h2>
+<p>来源：<a href="https://source.android.com/docs/core/architecture/bootloader/locking_unlocking">打开原始资料</a><br/>
+性质：官方技术文档｜状态：已读取。<br/>
+本次读取：通用状态、解锁开关、数据清除和critical保护语义。<br/>
+边界：不是联想特定版本的操作配方。</p>
+<h2 id="src-S08">S08 · Android Verified Boot README</h2>
+<p>来源：<a href="https://android.googlesource.com/platform/external/avb/+/master/README.md">打开原始资料</a><br/>
+性质：官方源码文档｜状态：已读取。<br/>
+本次读取：AVB验证与回滚保护概念。<br/>
+边界：只分析镜像元数据不足以知道设备全部防回滚策略。</p>
+<h2 id="src-S09">S09 · AOSP：Fastbootd</h2>
+<p>来源：<a href="https://source.android.com/docs/core/architecture/bootloader/fastbootd">打开原始资料</a><br/>
+性质：官方技术文档｜状态：已读取。<br/>
+本次读取：区分bootloader和userspace fastboot。<br/>
+边界：具体设备支持的查询仍须核对。</p>
+<h2 id="src-S10">S10 · AOSP：Boot image header</h2>
+<p>来源：<a href="https://source.android.com/docs/core/architecture/bootloader/boot-image-header">打开原始资料</a><br/>
+性质：官方技术文档｜状态：已读取。<br/>
+本次读取：启动头版本及结构分析入口。<br/>
+边界：没有本机镜像就不能替本机填启动布局。</p>
+<h2 id="src-S11">S11 · Lenovo Software Fix / Rescue and Smart Assistant</h2>
+<p>来源：<a href="https://support.lenovo.com/us/en/downloads/ds101291-rescue-and-smart-assistant-lmsa">打开原始资料</a><br/>
+性质：官方支持入口｜状态：部分读取。<br/>
+本次读取：确认产品支持入口；本次返回正文信息不足。<br/>
+边界：本机型号、地区、版本及执行平台支持均未核实。</p>
+<h2 id="src-S12">S12 · bkerler/edl</h2>
+<p>来源：<a href="https://github.com/bkerler/edl">打开原始资料</a><br/>
+性质：工具上游文档｜状态：已读取。<br/>
+本次读取：loader、设备标识与平台/厂商限制的研究入口。<br/>
+边界：没有取得经验证的TB331FC恢复链；不保证工具能救本机。</p>
+<h2 id="src-S13">S13 · Introducing Omarchy Dragon</h2>
+<p>来源：<a href="https://omarchy.org/news/2026/09/introducing-omarchy-dragon/">打开原始资料</a><br/>
+性质：项目官方公告｜状态：已读取。<br/>
+本次读取：2026-09-18：官方Snapdragon团队，当前公开工作聚焦X/X2系列电脑。<br/>
+边界：不能迁移成TB331FC支持承诺。</p>
+<h2 id="src-S14">S14 · omacom/try-omarchy</h2>
+<p>来源：<a href="https://github.com/omacom/try-omarchy">打开原始资料</a><br/>
+性质：项目官方仓库｜状态：已读取。<br/>
+本次读取：Apple Silicon Mac上的ARM虚拟机路径；USB直通为实验功能。<br/>
+边界：虚拟GPU和启动环境不验证平板硬件。</p>
+<h2 id="src-S15">S15 · omacom/omarchy-pkgs</h2>
+<p>来源：<a href="https://github.com/omacom/omarchy-pkgs">打开原始资料</a><br/>
+性质：项目官方仓库｜状态：已读取。<br/>
+本次读取：存在aarch64构建逻辑与架构选择。<br/>
+边界：选定版本所有依赖是否发布，需逐包验证。</p>
+<h2 id="src-S16">S16 · Omarchy manual：Getting started</h2>
+<p>来源：<a href="https://omarchy.org/manual/getting-started/">打开原始资料</a><br/>
+性质：项目官方手册｜状态：已读取。<br/>
+本次读取：普通安装的磁盘影响及早期输入要求。<br/>
+边界：不是Android平板刷机教程。</p>
+<h2 id="src-S17">S17 · Mesa：Freedreno</h2>
+<p>来源：<a href="https://docs.mesa3d.org/drivers/freedreno.html">打开原始资料</a><br/>
+性质：驱动上游文档｜状态：已读取。<br/>
+本次读取：Adreno用户空间驱动与设备表入口。<br/>
+边界：不证明本机kernel/display/touch完整支持。</p>
+<h2 id="src-S18">S18 · Linux qcom/sm6115.dtsi</h2>
+<p>来源：<a href="https://raw.githubusercontent.com/torvalds/linux/master/arch/arm64/boot/dts/qcom/sm6115.dtsi">打开原始资料</a><br/>
+性质：内核上游源码｜状态：已读取。<br/>
+本次读取：相邻平台设备树参考入口。<br/>
+边界：未证明与TB331FC兼容；不能替换本机设备树。</p>
+<h2 id="src-S19">S19 · postmarketOS：TB128FU 页面（待复核）</h2>
+<p>来源：<a href="https://wiki.postmarketos.org/wiki/Lenovo_Xiaoxin_Pad_2022_(lenovo-tb128fu">打开原始资料</a>)<br/>
+性质：社区设备Wiki｜状态：访问受限。<br/>
+本次读取：此次访问未成功取得可核验正文。<br/>
+边界：不引用其中功能表；不能据访问失败断言不存在移植。</p>
+<h2 id="src-S20">S20 · Android SDK Platform-Tools</h2>
+<p>来源：<a href="https://developer.android.com/tools/releases/platform-tools">打开原始资料</a><br/>
+性质：官方工具文档｜状态：已读取。<br/>
+本次读取：Google提供macOS ADB/Fastboot。<br/>
+边界：不证明OEM命令与任何特定固件兼容。</p>
+<h2 id="src-S21">S21 · Homebrew：android-platform-tools</h2>
+<p>来源：<a href="https://formulae.brew.sh/cask/android-platform-tools">打开原始资料</a><br/>
+性质：软件分发项目官方条目｜状态：已读取。<br/>
+本次读取：核对cask安装方式。<br/>
+边界：安装由Owner批准；实际版本另行记录。</p>
+<h2 id="src-S22">S22 · Claude Code：Permissions</h2>
+<p>来源：<a href="https://code.claude.com/docs/en/permissions">打开原始资料</a><br/>
+性质：产品官方文档｜状态：已读取。<br/>
+本次读取：权限与审批模式。<br/>
+边界：提示词和文档不是硬件隔离。</p>
+<h2 id="src-S23">S23 · Claude Code：Common workflows</h2>
+<p>来源：<a href="https://code.claude.com/docs/en/common-workflows">打开原始资料</a><br/>
+性质：产品官方文档｜状态：已读取。<br/>
+本次读取：Plan Mode与worktree工作流。<br/>
+边界：本地版本的CLI帮助仍需核对。</p>
+<h2 id="src-S24">S24 · Codex：Agent approvals &amp; security</h2>
+<p>来源：<a href="https://learn.chatgpt.com/docs/agent-approvals-security">打开原始资料</a><br/>
+性质：产品官方文档｜状态：已读取。<br/>
+本次读取：核对read-only/workspace-write、on-request及旧策略退役。<br/>
+边界：沙盒模式不是Android写保护；不授予高风险全权执行。</p>
+<h2 id="src-S25">S25 · Codex：AGENTS.md</h2>
+<p>来源：<a href="https://learn.chatgpt.com/docs/agent-configuration/agents-md">打开原始资料</a><br/>
+性质：产品官方文档｜状态：已读取。<br/>
+本次读取：项目指导文件及层级发现机制。<br/>
+边界：不改用户全局配置；指令文件不是不可绕过的权限。</p>
+<h2 id="src-S26">S26 · Termux：proot-distro</h2>
+<p>来源：<a href="https://github.com/termux/proot-distro">打开原始资料</a><br/>
+性质：工具上游文档｜状态：已读取。<br/>
+本次读取：PRoot用户空间与权限/内核/服务管理边界。<br/>
+边界：不能称为原生Omarchy。</p>
+<h2 id="src-S27">S27 · Termux：termux-x11</h2>
+<p>来源：<a href="https://github.com/termux/termux-x11">打开原始资料</a><br/>
+性质：工具上游文档｜状态：已读取。<br/>
+本次读取：Android图形入口的参考路径。<br/>
+边界：不代表Wayland与本机完整驱动已解决。</p>
+<h2>尚未完成的证据获取</h2>
+<p>尚未登录官方渠道查询本机资格；尚未取得并校验匹配恢复包；尚未取得本机boot/vendor_boot/设备树/引导组件；尚未确认TB331FC的内核源码与可复现Linux移植；尚未验证任何EDL loader与授权；尚未连接Mac或Pad。</p>
+<p>对postmarketOS相关页面和软件支持动态页面的访问限制，意味着本次无法核实部分内容，不意味着内容或支持不存在。下一轮可由Owner与Agent在正常浏览器中重试，并将来源与访问结果补入清单。</p>
+<p>此前对话中的未附可复核证据的说法不计入来源等级。网上的“已解锁出售”不能证明从用户当前版本能复现；未匹配版本的成功截图只保留为线索。</p>
+</section><section id="testing" class="chapter"><div class="chapter-label">测试与边界</div><h1>测试记录与边界</h1>
+<p>日期：2026-09-30。环境：Linux / x86_64 / Python 3.13.5。</p>
+<h2>已实际执行</h2>
+<pre><code class="language-bash">PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s tests -v
+PYTHONDONTWRITEBYTECODE=1 python3 scripts/collect_readonly.py
+</code></pre>
+<p>单元测试：<strong>32项，通过</strong>。详细stdout/stderr在<code>unit-tests.txt</code>。默认计划输出在<code>plan-only-example.json</code>，共有38项固定查询；这份文件只是计划，不是设备观测。</p>
+<p>Python源文件另经AST解析检查。没有真实ADB调用，没有USB设备访问，没有下载或运行厂商固件。</p>
+<p>本次测试对应采集器SHA-256：</p>
+<pre><code class="language-text">debba7c3af50fc505dcc935cae5994139a40ab66586a9a2ae7aea9f3b7650991
+</code></pre>
+<h2>覆盖</h2>
+<p>默认零执行、固定查询与非shell子进程、序列号格式/明确目标/型号校验、USB标志、多设备与授权状态拒绝、连接变化中止、超时无重试、未知字段保留、报告过滤与原始信息隔离、目录/文件权限、协作锁互斥。</p>
+<h2>不代表什么</h2>
+<p>没有在macOS实测，也没有在TB331FC上运行。Python 3.9是代码目标，不等于已经对每个3.9+版本做兼容矩阵。必须在Owner的Mac重跑并审核，再由Owner单独做第一次设备采集。</p>
+<p>测试不证明Bootloader可解锁、恢复包匹配、数据已备份、EDL可用、Linux启动或GPU正常。</p>
+<p>协作锁可被其他程序绕过；过滤器可能漏掉隐私字段；USB标志/型号异常可能产生保守拒绝；报告未知项不提供解锁许可。这些都是待实际环境确认的边界。</p>
+<h2>版本变更</h2>
+<p>修改脚本后应重新运行测试、计算哈希并接受另一Agent及Owner审阅。旧哈希/测试记录不自动适用于新代码。</p>
+</section></main>
+<footer>本阅读版不加载外部脚本或字体，可离线打开。外部资料链接联网后可访问。工具、任务和模板以 ZIP 执行包中的源文件为准；任何本机成功结论都需要实际证据。</footer></body></html>

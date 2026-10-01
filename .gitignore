@@ -1,0 +1,28 @@
+.DS_Store
+__pycache__/
+*.py[cod]
+.venv/
+.env
+.env.*
+private/
+firmware/
+external/
+build/
+*.img
+*.bin
+*.elf
+*.mbn
+*.key
+*.pem
+*.p12
+*.pfx
+*.zip
+*.7z
+*.tar
+*.tar.*
+*.log
+*sn.img
+sn_*
+*inventory.private*
+# Owner checks content before explicitly committing anything in approved-input.
+# .gitignore is not access control and does not protect files already tracked.

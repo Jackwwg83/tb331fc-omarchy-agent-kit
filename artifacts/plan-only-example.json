@@ -1,0 +1,280 @@
+{
+  "tool": "TB331FC owner inventory",
+  "version": "1.0.0",
+  "mode": "PLAN_ONLY",
+  "device_access": false,
+  "writes_to_tablet_requested": false,
+  "queries": [
+    {
+      "key": "prop:ro.product.model",
+      "shell_argv": [
+        "getprop",
+        "ro.product.model"
+      ]
+    },
+    {
+      "key": "prop:ro.product.device",
+      "shell_argv": [
+        "getprop",
+        "ro.product.device"
+      ]
+    },
+    {
+      "key": "prop:ro.product.name",
+      "shell_argv": [
+        "getprop",
+        "ro.product.name"
+      ]
+    },
+    {
+      "key": "prop:ro.product.board",
+      "shell_argv": [
+        "getprop",
+        "ro.product.board"
+      ]
+    },
+    {
+      "key": "prop:ro.product.vendor.model",
+      "shell_argv": [
+        "getprop",
+        "ro.product.vendor.model"
+      ]
+    },
+    {
+      "key": "prop:ro.board.platform",
+      "shell_argv": [
+        "getprop",
+        "ro.board.platform"
+      ]
+    },
+    {
+      "key": "prop:ro.soc.manufacturer",
+      "shell_argv": [
+        "getprop",
+        "ro.soc.manufacturer"
+      ]
+    },
+    {
+      "key": "prop:ro.soc.model",
+      "shell_argv": [
+        "getprop",
+        "ro.soc.model"
+      ]
+    },
+    {
+      "key": "prop:ro.product.cpu.abilist",
+      "shell_argv": [
+        "getprop",
+        "ro.product.cpu.abilist"
+      ]
+    },
+    {
+      "key": "prop:ro.build.fingerprint",
+      "shell_argv": [
+        "getprop",
+        "ro.build.fingerprint"
+      ]
+    },
+    {
+      "key": "prop:ro.build.display.id",
+      "shell_argv": [
+        "getprop",
+        "ro.build.display.id"
+      ]
+    },
+    {
+      "key": "prop:ro.build.version.incremental",
+      "shell_argv": [
+        "getprop",
+        "ro.build.version.incremental"
+      ]
+    },
+    {
+      "key": "prop:ro.build.version.release",
+      "shell_argv": [
+        "getprop",
+        "ro.build.version.release"
+      ]
+    },
+    {
+      "key": "prop:ro.build.version.sdk",
+      "shell_argv": [
+        "getprop",
+        "ro.build.version.sdk"
+      ]
+    },
+    {
+      "key": "prop:ro.build.version.security_patch",
+      "shell_argv": [
+        "getprop",
+        "ro.build.version.security_patch"
+      ]
+    },
+    {
+      "key": "prop:ro.vendor.build.security_patch",
+      "shell_argv": [
+        "getprop",
+        "ro.vendor.build.security_patch"
+      ]
+    },
+    {
+      "key": "prop:ro.boot.hardware",
+      "shell_argv": [
+        "getprop",
+        "ro.boot.hardware"
+      ]
+    },
+    {
+      "key": "prop:ro.boot.hardware.sku",
+      "shell_argv": [
+        "getprop",
+        "ro.boot.hardware.sku"
+      ]
+    },
+    {
+      "key": "prop:ro.boot.bootloader",
+      "shell_argv": [
+        "getprop",
+        "ro.boot.bootloader"
+      ]
+    },
+    {
+      "key": "prop:ro.boot.verifiedbootstate",
+      "shell_argv": [
+        "getprop",
+        "ro.boot.verifiedbootstate"
+      ]
+    },
+    {
+      "key": "prop:ro.boot.flash.locked",
+      "shell_argv": [
+        "getprop",
+        "ro.boot.flash.locked"
+      ]
+    },
+    {
+      "key": "prop:ro.boot.vbmeta.device_state",
+      "shell_argv": [
+        "getprop",
+        "ro.boot.vbmeta.device_state"
+      ]
+    },
+    {
+      "key": "prop:ro.boot.veritymode",
+      "shell_argv": [
+        "getprop",
+        "ro.boot.veritymode"
+      ]
+    },
+    {
+      "key": "prop:ro.oem_unlock_supported",
+      "shell_argv": [
+        "getprop",
+        "ro.oem_unlock_supported"
+      ]
+    },
+    {
+      "key": "prop:ro.boot.slot_suffix",
+      "shell_argv": [
+        "getprop",
+        "ro.boot.slot_suffix"
+      ]
+    },
+    {
+      "key": "prop:ro.build.ab_update",
+      "shell_argv": [
+        "getprop",
+        "ro.build.ab_update"
+      ]
+    },
+    {
+      "key": "prop:ro.boot.dynamic_partitions",
+      "shell_argv": [
+        "getprop",
+        "ro.boot.dynamic_partitions"
+      ]
+    },
+    {
+      "key": "prop:ro.boot.virtual_ab.enabled",
+      "shell_argv": [
+        "getprop",
+        "ro.boot.virtual_ab.enabled"
+      ]
+    },
+    {
+      "key": "kernel",
+      "shell_argv": [
+        "uname",
+        "-srvm"
+      ]
+    },
+    {
+      "key": "proc_version",
+      "shell_argv": [
+        "cat",
+        "/proc/version"
+      ]
+    },
+    {
+      "key": "meminfo",
+      "shell_argv": [
+        "cat",
+        "/proc/meminfo"
+      ]
+    },
+    {
+      "key": "partitions",
+      "shell_argv": [
+        "cat",
+        "/proc/partitions"
+      ]
+    },
+    {
+      "key": "block_names",
+      "shell_argv": [
+        "ls",
+        "-l",
+        "/dev/block/by-name"
+      ]
+    },
+    {
+      "key": "dt_model",
+      "shell_argv": [
+        "cat",
+        "/sys/firmware/devicetree/base/model"
+      ]
+    },
+    {
+      "key": "dt_compatible",
+      "shell_argv": [
+        "cat",
+        "/sys/firmware/devicetree/base/compatible"
+      ]
+    },
+    {
+      "key": "shell_identity",
+      "shell_argv": [
+        "id"
+      ]
+    },
+    {
+      "key": "selinux",
+      "shell_argv": [
+        "getenforce"
+      ]
+    },
+    {
+      "key": "battery",
+      "shell_argv": [
+        "dumpsys",
+        "battery"
+      ]
+    }
+  ],
+  "notes": [
+    "No ADB process is launched in plan mode.",
+    "Collection requires --collect and an explicit owner-selected USB serial.",
+    "No fastboot, reboot, root, setprop, install, EDL, partition dump or flash.",
+    "Android and ADB may write ordinary logs/authorization state: not forensic zero-write."
+  ]
+}
