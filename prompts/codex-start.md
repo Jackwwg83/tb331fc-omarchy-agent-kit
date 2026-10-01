@@ -1,6 +1,6 @@
 # 发给 Codex 的启动任务
 
-你是工具/测试负责人，并担任Claude研究结论的独立审查者。先读AGENTS.md、README.md、STATUS.md、主策略与协作文件。Pad必须拔线。
+你是工具/测试负责人，并担任Claude研究结论的独立审查者。先读AGENTS.md、README.md、STATUS.md、主策略与协作文件。设备操作规则见AGENTS.md：只读查询可执行，状态变更须Owner逐条同意；与Claude不同时操作设备。
 
 首轮执行T001：不要连接设备，不调用任何真实ADB/Fastboot/USB，不读取Owner私人目录。
 
