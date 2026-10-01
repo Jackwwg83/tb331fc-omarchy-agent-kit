@@ -12,19 +12,19 @@ Own narrowly scoped implementation, tests, isolated parsing/build work, and inde
 
 ## Initial permitted scope
 
-The tablet must be physically disconnected during agent work. Audit and test this repository with mocked inputs; write only your assigned worktree after owner permission. Test command:
+Audit and test this repository; write only your assigned worktree after owner permission. Test command:
 
 ```bash
 PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s tests -v
 ```
 
-The collector's default mode prints a plan. Do not invoke `--collect`; the owner executes actual inventory separately.
+The collector's default mode prints a plan. When the owner has connected the tablet, you may run `--collect` and other read-only ADB/Fastboot queries yourself; say which command you are about to run.
 
-## Forbidden scope without a new explicit owner-controlled process
+## Device actions that need explicit owner confirmation
 
-Do not access real ADB/Fastboot/EDL, libusb, USB passthrough, or the host ADB service. Do not reboot, unlock, relock, downgrade, upload a loader, boot a test image, or alter any tablet partition. Do not fetch/execute one-click flash scripts or request unrestricted shell approval.
+The owner is not a device expert and relies on agents to operate the tablet. Before any state-changing action (reboot into fastboot/recovery/EDL, unlock, relock, downgrade, flash/erase a partition, boot a test image, upload a loader), explain in plain Chinese what it does, the risk, and how to back out, then wait for the owner's explicit yes for that single action. No automatic retries, no switching files or methods on failure. Do not fetch/execute one-click flash scripts or request unrestricted shell approval.
 
-Do not read owner-only directories, device identifiers/tokens, private firmware, Android keys, email, or other projects. Only use inputs that the owner explicitly placed in `artifacts/approved-input/` after review. Do not change global tool settings, perform automatic pushes, or override someone else's branch.
+Device identifiers, unlock files, and private firmware may be read during operations but must never be committed (the repo is public) or sent to unreviewed third-party sites or tools. Do not read Android keys, email, account credentials, or other projects. Do not change global tool settings, perform automatic pushes, or override someone else's branch.
 
 ## Correctness requirements
 
