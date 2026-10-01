@@ -12,7 +12,7 @@
 
 ## 明天最短启动顺序
 
-**1．先拔掉 Pad，解压到一个新目录。** 建议目录是 `~/Projects/tb331fc-omarchy-agent-kit`。不要覆盖现有项目。
+**1．解压到一个新目录。** 建议目录是 `~/Projects/tb331fc-omarchy-agent-kit`。不要覆盖现有项目。
 
 **2．先读主策略，再建立两个工作区。** 主策略是 `docs/01-strategy.zh-CN.md`；Git worktree 的完整命令在 `docs/03-agent-workflow.zh-CN.md`。先有初始 commit，再创建 worktree，不让两个工具同时改主目录。
 
@@ -30,7 +30,7 @@ Codex：读取 AGENTS.md、README.md 和 prompts/codex-start.md，
 
 初始启动参数已写在工作流文档中。先用计划/只读模式，明确可写范围后才允许修改本项目文件；**不要开启跳过审批或完全放权模式**。
 
-**4．你在独立终端验证采集器。** 此时仍不连接 Pad：
+**4．验证采集器（不需要连接 Pad）。** Agent 可以替你执行：
 
 ```bash
 cd ~/Projects/tb331fc-omarchy-agent-kit
@@ -40,7 +40,7 @@ python3 scripts/collect_readonly.py
 
 默认只显示计划。随包 `artifacts/unit-tests.txt` 记录了生成时的模拟测试，但你和Agent仍应检查并在Mac重跑。
 
-**5．脚本经双方审阅后，由你连接并读取设备。** 暂停/退出两个Agent的工具执行；确认没有后台循环。启用USB调试、只连接这台平板，在你自己的终端执行：
+**5．脚本经双方审阅后，接上 Pad 读取设备。** 你在平板上启用USB调试、只连接这台平板；命令可由 Agent 执行（执行前会说明）：
 
 ```bash
 adb devices -l
@@ -49,7 +49,7 @@ python3 scripts/collect_readonly.py --collect
 
 脚本提示输入USB序列号，不回显。更完整的环境准备与失败处理见 `docs/02-runbook.zh-CN.md`。**不要在这个阶段切换OEM解锁开关、重启到下载模式或执行任何刷写。**
 
-**6．拔线、查看报告、检查脱敏。** 私人报告默认在 `~/.local/share/tb331fc-owner-only/`，不在仓库内。只把你审阅过的过滤版复制到 `artifacts/approved-input/`，再交给两个Agent解释。
+**6．查看报告、检查脱敏。** 私人报告默认在 `~/.local/share/tb331fc-owner-only/`，不在仓库内。只把你审阅过的过滤版复制到 `artifacts/approved-input/`，再交给两个Agent解释。
 
 **7．让两个Agent交付一页决策，而不是自动进入刷机。** 首日任务表在 `docs/05-first-day.zh-CN.md`；用 `templates/day1-decision.md` 汇总。只有证据和恢复条件过关后，才提出单独的实际操作申请。
 
@@ -78,6 +78,6 @@ python3 scripts/collect_readonly.py --collect
 
 ## 最重要的操作规则
 
-研究与编码时拔线；实机动作由你从单一终端执行。提示词、文件沙盒和协作锁都不是不可绕过的USB写保护。未知条件保留为未知，不能为了完成任务自行扩大权限。
+Owner 接上 Pad 后，Agent 可以直接执行只读查询；任何会改变设备状态的操作（重启进特殊模式、解锁、刷写、擦除、降级等），Agent 必须先用大白话说明做什么、风险和退路，得到你逐条明确同意才执行，失败不自动重试。同一时间只让一个 Agent 操作设备。未知条件保留为未知，不能为了完成任务自行扩大权限。
 
 没有匹配固件、恢复条件和逐次批准，不进行解锁、降级、重新上锁、临时启动镜像、写分区、进入EDL或上传loader。主策略中的阶段门是研究安排，**不是自动化执行许可**。

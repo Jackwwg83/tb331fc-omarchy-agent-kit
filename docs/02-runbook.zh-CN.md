@@ -3,9 +3,9 @@
 适用基线：TB331FC / 照片版本 ZUX OS 1.1.10.680。研究日期 2026-09-30。  
 先读 `01-strategy.zh-CN.md`；本手册不包含可直接执行的解锁/刷写序列。
 
-## A. 主机准备：先不连接平板
+## A. 主机准备
 
-在你自己的终端确认环境，不把完整终端历史发给 Agent：
+确认环境（可由 Agent 执行）：
 
 ```bash
 uname -m
@@ -43,7 +43,7 @@ python3 scripts/collect_readonly.py
 
 ## C. 由 Owner 执行一次真实采集
 
-先手动备份重要资料，确认设备正常。开发者选项中启用 USB 调试属于你执行的配置动作；不要顺手打开 OEM 解锁。随后暂停/退出两个 Agent 的工具执行，确认没有后台自动任务。
+先手动备份重要资料，确认设备正常。开发者选项中启用 USB 调试属于你执行的配置动作；不要顺手打开 OEM 解锁。随后确认只有一个 Agent 在操作设备，没有后台自动任务。
 
 连接**唯一的一台**平板，授权你自己的 Mac。不要连接其他 Android 设备或启动 Android 模拟器。你在独立本地终端运行：
 
@@ -64,7 +64,7 @@ python3 scripts/collect_readonly.py --collect
 
 脚本要求 ADB 枚举中有 USB 标志、设备状态正常、只有一个设备且型号严格匹配 TB331FC；不满足就停止。不同 ADB 实现若不显示 USB 标志，**不要删掉校验直接重跑**，先让双方分析原因和更可靠的替代验证。
 
-采集后拔线。查看返回码及 `status`；`collection_completed` 只代表采集流程完成，不代表字段全部可读，更不代表可以解锁。
+采集后查看返回码及 `status`；`collection_completed` 只代表采集流程完成，不代表字段全部可读，更不代表可以解锁。
 
 ### 采集覆盖与明确不覆盖
 
@@ -84,7 +84,7 @@ python3 scripts/collect_readonly.py --collect
 
 过滤版最初仍保存在私有目录。你检查后，只把必要内容复制到 `artifacts/approved-input/`，例如 `inventory-owner-reviewed.json`。默认目录是空的，Agent 不得自己去私人目录寻找报告。
 
-不要把真实 SN、Bootloader_SN、解锁文件、完整固件、私钥或官方账户页面交给公共仓库。Bootloader_SN 若确需用于官方流程，由你依据官网说明在本地读取和输入；该属性不在本包自动采集列表中。[S01]
+不要把真实 SN、Bootloader_SN、解锁文件、完整固件、私钥或官方账户页面交给公共仓库。Bootloader_SN 若确需用于官方流程，可由 Agent 按官网说明读取后显示给你填写，不写入任何文件；该属性不在本包自动采集列表中。[S01]
 
 Agent 用 `templates/hardware-report.md` 解释每一条值。`unknown_empty`、`unknown_error` 都应保留为未知；不把 `0`、空字符串、不支持命令三者混在一起。对照设备照片与 Android 属性，发现矛盾先停止推断。
 
